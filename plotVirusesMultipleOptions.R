@@ -6,7 +6,7 @@ library(tidyr)
 library(dplyr)
 library(gplots)
 library(RColorBrewer)
-
+############# DATA PREPARATION ######
 # uploda metadata
 metadata = read.csv("metadata.csv")
 colnames(metadata)[1] = "ID"
@@ -259,10 +259,12 @@ plotVirus = function(tableToPlot,
   
 }
 
-
+graphics.off()
 plotVirus(finalBestHit, finalBestHitReads, metadata, savePlots = T)
 plotVirus(finalGuess, finalBestHitReads, metadata, savePlots = T)
 
+#plotVirus(finalBestHit, finalBestHit, metadata = metadata, minReadThreshold = 0.005)
+#plotVirus(finalGuess, finalGuess, metadata = metadata, minReadThreshold = 0.005)
 
 
 
@@ -272,6 +274,10 @@ plotVirus(finalGuess, finalBestHitReads, metadata, savePlots = T)
 filteredGenomes = finalBestHitReads[apply(finalBestHitReads[,-c(1,2)], 1, function(x) !all(x < 100)),1]$Genome
 
 heatmapTable =finalBestHit %>% 
+  filter(Genome %in% filteredGenomes)
+rownames(heatmapTable) = heatmapTable$Organism
+
+heatmapTable =finalGuess %>% 
   filter(Genome %in% filteredGenomes)
 rownames(heatmapTable) = heatmapTable$Organism
 
