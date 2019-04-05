@@ -43,7 +43,11 @@ graph/
 figures/
 bipartite_graphs_Karel/
 bipartiteOTU_Marcelka/
+figuresToSend/
 *.xlsx
 *.docx
 *.txt
 *.csv
+.Rproj.user
+
+.DS_Store
