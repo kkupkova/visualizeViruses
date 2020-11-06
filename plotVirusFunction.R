@@ -1,6 +1,12 @@
-tableToPlot = finalBestHit
-criteriaTable = finalBestHitReads
-
+# ******** function plotVirus ********
+# input: *tableToPlot - which of the results do you want plotted (e.g. FinalBestHit or FinalGuess)
+#        *criteriaTable - which table is used to filter the plotted genomes (e.g. with finalBestHitReads and the
+#                      default threshold minReadThreshold = 100, Organisms where at least one had 100 or more 
+#                      reads mapped will be kept, the rest is tossed)
+#         *metadata - table with metadata
+#         *minReadThreshold - used for the filtering of organisms with at least some abundance
+#         *lazOrdered - should the IDs in the final plot be organized by laz score? T/F
+#         *savePlots - should the resulting plots be saved as pdf? T/F (will create a folder "figures")
 
 
 plotVirus = function(tableToPlot, 
