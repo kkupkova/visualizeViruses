@@ -1,13 +1,22 @@
+# the script uploads all the tsv file obtained from Pathoscope - just change the path to the folder with files 
+# and at theis point the regular expression is set in a way thet it will extract only files which start with
+# virus and end with .tsv - just change the pattern to whatever needed
+
+# it extracts all the taxonomic ID numbers and gets only the unique ones - take those and paste to the link provided
+
+# once we have the "dictionary" with the taxonomic ID and the organism name - rewtite the tsv files and save - 
+# the new tsv files have now prefix name_
+
 rm(list=ls())
 library(data.table)
 library(stringr)   
 
 # get the tax IDs in all of the TSV files
-tsvFiles = list.files(path = "results_files_sent_to_Kristyna_022519/", pattern = "^virus.*.tsv$", full.names = T)
+tsvFiles = list.files(path = "results_files_sent_to_Kristyna_022519", pattern = "^virus.*.tsv$", full.names = T)
 
 ti = c()
 for (i in tsvFiles){
-  fileX = read.table(i, skip = 1, sep = "\t", header = T)
+  fileX = read.table(i, skip = 1, sep = "\t", header = T, as.is = T)
   
   helpVec = unlist(strsplit(fileX$Genome, split = "|", fixed = T))
   
