@@ -2,7 +2,26 @@ library(RCy3)
 library(igraph)
 # Take data from dataPreparation.R script
 
-#dataToPlot = as.data.frame(finalBestHit)
+# function takes the OTU table of choosing - selects the rows where at least one of the samples passes the 
+# threshold set up in the input to the function - if saveNodesAndEdges = T tables with nodes and edges are 
+# going to be exported to csv
+
+# nodes table columns: 
+#  - "Nodes" - name of the node = organism or ID of the kid
+#  - "type"  - type of the node = is it organism node or ID node
+#  - "typeNode" - contains information about site also = 3 categories : UVA, Banglades, Organism
+#  - "sizeLog2Median"
+#  - "sizeLog2Mean"
+#  - "sizelog2Max"
+#                 -> size of the ID nodes is fixed, size of the organism ID is base on the median / mean/ max 
+#                     abundance across the row
+
+
+# edges: 
+# only edges higher than threshold are created
+# edges are normalized - (row /(max(row))) *5  -> the 5 is there only to make the edges overall thicker
+# then I append the metadata to the edges for potential coloring and weighting
+
 constructGraph = function(dataToPlot, 
                           threshold = 0.001,
                           saveNodesAndEdges = F){
